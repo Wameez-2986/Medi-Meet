@@ -1,17 +1,16 @@
-import { getDoctorsBySpeciality } from '@/actions/doctors-listing';
-import DoctorCard from '@/components/doctor-card';
-import PageHeader from '@/components/page-header';
-import { redirect } from 'next/navigation';
-import React from 'react'
+import { redirect } from "next/navigation";
+import PageHeader from "@/components/page-header";
+import DoctorCard from "@/components/doctor-card";
+import { getDoctorsBySpeciality } from "@/actions/doctors-listing";
 
 const SpecialityPage = async ({ params }) => {
-  const { speciality } = await params;
+  const { specialty } = await params;
 
-  if (!speciality) {
+  if (!specialty) {
     redirect("/doctors");
   }
 
-  const { doctors, error } = await getDoctorsBySpeciality(speciality);
+  const { doctors, error } = await getDoctorsBySpeciality(specialty);
 
   if (error) {
     console.error("Error fetching doctors:", error);
@@ -19,31 +18,31 @@ const SpecialityPage = async ({ params }) => {
 
   return (
     <div className="space-y-5">
-      <PageHeader 
-        title={speciality.split("%20").join(" ")}
+      <PageHeader
+        title={specialty.split("%20").join(" ")}
         backLink="/doctors"
-        backLabel="All Specialities"
+        backLabel="All Specialties"
       />
 
       {doctors && doctors.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {doctors.map(doctor => (
+          {doctors.map((doctor) => (
             <DoctorCard key={doctor.id} doctor={doctor} />
           ))}
         </div>
-       ) : (
-         <div className="text-center py-12">
+      ) : (
+        <div className="text-center py-12">
           <h3 className="text-xl font-medium text-white mb-2">
             No doctors available
           </h3>
           <p className="text-muted-foreground">
-            There are currently no verified doctors in this speciality. Please
-            check back later or choose another speciality.
+            There are currently no verified doctors in this specialty. Please
+            check back later or choose another specialty.
           </p>
-         </div> 
+        </div>
       )}
     </div>
   );
-};
+}
 
 export default SpecialityPage

@@ -42,21 +42,24 @@ const DoctorDashboard = async () => {
             <Clock className="h-4 w-4 mr-2 hidden md:inline" />
             <span>Availability</span>
           </TabsTrigger>
-          <TabsTrigger
+        </TabsList>
+          {/* <TabsTrigger
             value="payouts"
             className="flex-1 md:flex md:items-center md:justify-start md:px-4 md:py-3 w-full"
           >
             <CreditCard className="h-4 w-4 mr-2 hidden md:inline" />
             <span>Payouts</span>
           </TabsTrigger>
-        </TabsList>
-        
-        <TabsContent value="appointments" className="border-none p-0">
-           Todo
-        </TabsContent>
-        <TabsContent value="availability" className="border-none p-0">
-          <AvailabilitySettings slots={availabilityData.slots || []} />
-        </TabsContent>
+        </TabsList> */}
+
+        <div className="md:col-span-3">
+          <TabsContent value="appointments" className="border-none p-0">
+             Todo
+          </TabsContent>
+          <TabsContent value="availability" className="border-none p-0">
+             <AvailabilitySettings slots={availabilityData.slots || []} />
+          </TabsContent>
+        </div>
       </Tabs>
   );
 };
